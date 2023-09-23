@@ -1,0 +1,5 @@
+jdk:
+  - openjdk20
+before_install:
+  - sdk install 20.0.2-tem
+  - sdk use 20.0.2-tem
