@@ -5,6 +5,7 @@ plugins {
     application
     id("com.diffplug.spotless") version "6.19.0"
     `maven-publish`
+    base
 }
 group = "net.rptools.advanced-dice"
 version = "1.0-SNAPSHOT"
