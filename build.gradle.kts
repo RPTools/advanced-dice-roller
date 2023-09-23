@@ -83,15 +83,13 @@ tasks.generateGrammarSource {
     outputDirectory = File("build/generated/antlr/main/net/rptools/maptool/advanceddice/parser")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("advanced-dice-rolls") {
-                from(components["java"])
-                pom {
-                    groupId = "net.rptools.maptool"
-                    artifactId = "advanced-rolls"
-                }
+publishing {
+    publications {
+        create<MavenPublication>("advanced-dice-rolls") {
+            from(components["java"])
+            pom {
+                groupId = "net.rptools.maptool"
+                artifactId = "advanced-rolls"
             }
         }
     }
