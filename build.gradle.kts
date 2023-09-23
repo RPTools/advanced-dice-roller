@@ -1,7 +1,6 @@
 plugins {
     antlr
     `java-library`
-    eclipse
     jacoco
     application
     id("com.diffplug.spotless") version "6.19.0"
@@ -84,13 +83,15 @@ tasks.generateGrammarSource {
     outputDirectory = File("build/generated/antlr/main/net/rptools/maptool/advanceddice/parser")
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maptool-builtin-addons") {
-            from(components["java"])
-            pom {
-                groupId = "net.rptools.maptool"
-                artifactId = "advanced-rolls"
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("advanced-dice-rolls") {
+                from(components["java"])
+                pom {
+                    groupId = "net.rptools.maptool"
+                    artifactId = "advanced-rolls"
+                }
             }
         }
     }
