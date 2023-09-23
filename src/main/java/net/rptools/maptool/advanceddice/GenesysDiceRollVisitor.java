@@ -45,9 +45,7 @@ import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.SuccessContext;
 import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.ThreatContext;
 import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.TriumphContext;
 
-/**
- * Tree visitor for te syntax tree built by the parser.
- */
+/** Tree visitor for te syntax tree built by the parser. */
 public class GenesysDiceRollVisitor
     extends net.rptools.maptool.advanceddice.parser.GenesysDiceParserBaseVisitor<
         GenesysDiceResultBuilder> {
@@ -62,6 +60,7 @@ public class GenesysDiceRollVisitor
 
   /**
    * Constructor.
+   *
    * @param variableResolver the function used to resolve variables.
    * @param propertyResolver the function used to resolve properties.
    * @param promptResolver the function used to resolve prompts.
@@ -275,6 +274,7 @@ public class GenesysDiceRollVisitor
 
   /**
    * Returns the number represented by the specified context.
+   *
    * @param num the context to get the number from.
    * @return the number represented by the specified context.
    */

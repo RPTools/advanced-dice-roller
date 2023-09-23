@@ -83,3 +83,15 @@ tasks.generateGrammarSource {
     // split grammar files
     outputDirectory = File("build/generated/antlr/main/net/rptools/maptool/advanceddice/parser")
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maptool-builtin-addons") {
+            from(components["java"])
+            pom {
+                groupId = "net.rptools.maptool"
+                artifactId = "advanced-rolls"
+            }
+        }
+    }
+}

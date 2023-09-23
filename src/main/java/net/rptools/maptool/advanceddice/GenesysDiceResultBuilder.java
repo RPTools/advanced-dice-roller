@@ -20,9 +20,7 @@ import java.util.List;
 import java.util.Map;
 import net.rptools.maptool.advanceddice.GenesysDiceResult.Result;
 
-/**
- * Builder class for creating {@link GenesysDiceResult} objects.
- */
+/** Builder class for creating {@link GenesysDiceResult} objects. */
 public class GenesysDiceResultBuilder {
 
   /** The string that represents the roll. */
@@ -34,6 +32,7 @@ public class GenesysDiceResultBuilder {
 
   /**
    * Sets the roll string.
+   *
    * @param rollString the roll string.
    * @return this builder.
    */
@@ -44,6 +43,7 @@ public class GenesysDiceResultBuilder {
 
   /**
    * Adds a capture group to the result.
+   *
    * @param name the name of the group.
    * @param result the result of the group.
    * @return this builder.
@@ -57,6 +57,7 @@ public class GenesysDiceResultBuilder {
 
   /**
    * Adds a result to the roll (not from a roll).
+   *
    * @param result the result to add.
    * @return this builder.
    */
@@ -67,6 +68,7 @@ public class GenesysDiceResultBuilder {
 
   /**
    * Adds a result to the roll for the specified dice type.
+   *
    * @param diceType the dice type.
    * @param result the result to add.
    * @return this builder.
@@ -78,6 +80,7 @@ public class GenesysDiceResultBuilder {
 
   /**
    * "Rolls" the specified dice type and adds the result to the roll.
+   *
    * @param diceType the dice type.
    * @return this builder.
    */
@@ -88,6 +91,7 @@ public class GenesysDiceResultBuilder {
 
   /**
    * Merges the specified result into this one.
+   *
    * @param result the result to merge into this one.
    * @return this builder.
    */
@@ -105,6 +109,7 @@ public class GenesysDiceResultBuilder {
 
   /**
    * Merges the specified results into this one.
+   *
    * @param result the results to merge into this one.
    * @return this builder.
    */
@@ -122,6 +127,7 @@ public class GenesysDiceResultBuilder {
 
   /**
    * Builds a {@link GenesysDiceResult} from this builder.
+   *
    * @return the result
    */
   public GenesysDiceResult build() {
