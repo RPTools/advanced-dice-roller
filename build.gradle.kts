@@ -3,7 +3,7 @@ plugins {
     `java-library`
     jacoco
     application
-    id("com.diffplug.spotless") version "6.19.0"
+    id("com.diffplug.spotless") version "6.21.0"
     `maven-publish`
     base
 }
