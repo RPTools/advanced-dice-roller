@@ -131,7 +131,7 @@ public class GenesysDiceRollVisitor
   public GenesysDiceResultBuilder visitGroupedGenesysRoll(GroupedGenesysRollContext ctx) {
     var groupRes = new GenesysDiceResultBuilder();
     var res = visit(ctx.genesysRolls());
-    return groupRes.addGroup(ctx.groupName().getText(), res).setRollString(ctx.getText());
+    return groupRes.addGroup(ctx.groupName().getText().replaceAll(":$", ""), res).setRollString(ctx.getText());
   }
 
   @Override
