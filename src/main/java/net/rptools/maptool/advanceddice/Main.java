@@ -14,23 +14,10 @@
  */
 package net.rptools.maptool.advanceddice;
 
-import net.rptools.maptool.advanceddice.parser.GenesysDiceLexer;
-import net.rptools.maptool.advanceddice.parser.GenesysDiceParser;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-
 public class Main {
 
   public static void main(String[] args) {
-    var lexer =
-        new GenesysDiceLexer(
-            CharStreams.fromString("2y (boost: 2b (subboost: 4b)) ${?whats the value}f"));
-    var tokens = new CommonTokenStream(lexer);
-    var parser = new GenesysDiceParser(tokens);
-    var tree = parser.startGenesys();
-    var visitor = new GenesysDiceRollVisitor(s -> 1, s -> 1, s -> 1);
-    GenesysDiceResultBuilder result = visitor.visit(tree);
-    result.setRollString(lexer.getInputStream().toString());
+    var result = new GenesysDiceRoller().roll("2y (boost: 2b (subboost: 4b)) ${?whats the value}f");
     System.out.println(result);
   }
 }
