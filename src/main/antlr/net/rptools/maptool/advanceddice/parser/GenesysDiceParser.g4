@@ -56,7 +56,6 @@ genesysNumberDice             : INTEGER_LITERAL
                               | PROMPT
                               ;
 
-
 genesysFunction               : func=FUNCTION LPAREN genesysFunctionParams RPAREN
                               ;
 

@@ -70,7 +70,7 @@ FUNCTION                         : '#' IDENTIFIER;
 // Variables
 PROPERTY                         : LBRACE '@' (~[}])+ RBRACE;
 PROMPT                           : LBRACE '?' (~[}])+ RBRACE;
-VARIABLE                         : LBRACE (~[?@]) (~[}])+ RBRACE;
+VARIABLE                         : LBRACE (~[?@]) (~[}])* RBRACE;
 
 
 // Dice Types
