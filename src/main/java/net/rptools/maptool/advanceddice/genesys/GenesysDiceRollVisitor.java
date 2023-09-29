@@ -288,13 +288,16 @@ public class GenesysDiceRollVisitor
     if (num.INTEGER_LITERAL() != null) {
       return Integer.parseInt(num.INTEGER_LITERAL().getText());
     } else if (num.VARIABLE() != null) {
-      return variableResolver.applyAsInt(num.VARIABLE().getText());
+      var name = num.VARIABLE().getText().replaceAll("^\\{", "").replaceAll("}$", "");
+      return variableResolver.applyAsInt(name);
     } else if (num.PROPERTY() != null) {
-      return propertyResolver.applyAsInt(num.PROPERTY().getText());
+      var name = num.PROPERTY().getText().replaceAll("^\\{@", "").replaceAll("}$", "");
+      return propertyResolver.applyAsInt(name);
     } else if (num.PROMPT() != null) {
-      return promptResolver.applyAsInt(num.PROMPT().getText());
+      var name = num.PROMPT().getText().replaceAll("^\\{\\?", "").replaceAll("}$", "");
+      return promptResolver.applyAsInt(name);
     } else {
-      return 1; // TODO: CDW
+      throw new IllegalArgumentException("Unknown number type"); // Shouldn't happen
     }
   }
 

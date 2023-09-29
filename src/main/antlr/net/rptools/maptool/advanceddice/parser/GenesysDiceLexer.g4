@@ -68,9 +68,9 @@ FUNCTION                         : '#' IDENTIFIER;
 
 
 // Variables
-VARIABLE                         : '${' (~[}])+ '}';
-PROPERTY                         : '${@' (~[}])+ '}';
-PROMPT                           : '${?' (~[}])+ '}';
+PROPERTY                         : LBRACE '@' (~[}])+ RBRACE;
+PROMPT                           : LBRACE '?' (~[}])+ RBRACE;
+VARIABLE                         : LBRACE (~[?@]) (~[}])+ RBRACE;
 
 
 // Dice Types
@@ -94,6 +94,8 @@ fragment WHITE_DICE_NAMES         : 'w' | 'white';
 
 
 
+fragment LBRACE                   : '{';
+fragment RBRACE                   : '}';
 
 
 

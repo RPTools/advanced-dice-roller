@@ -20,7 +20,7 @@ public class Main {
 
   public static void main(String[] args) {
     try {
-      var res = new GenesysDiceRoller().roll("3yhs", null, null, null);
+      var res = new GenesysDiceRoller().roll("3y{@prop}y{var}y{?prompt}s", n -> 1, n -> 2, n -> 3);
       System.out.println(res);
     } catch (Exception e) {
       e.printStackTrace();
