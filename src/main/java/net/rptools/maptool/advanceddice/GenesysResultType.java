@@ -71,6 +71,9 @@ public enum GenesysResultType {
   /** The sort order of the result when grouped. */
   private final int groupSort;
 
+  /** The font characters that represent this result if using the genesys or starwars fonts. */
+  private final String fontCharacters;
+
   /**
    * Constructor.
    *
@@ -104,6 +107,7 @@ public enum GenesysResultType {
     this.light = light;
     this.dark = dark;
     this.groupSort = groupSort;
+    this.fontCharacters = fontCharacters;
   }
 
   /**
@@ -185,5 +189,13 @@ public enum GenesysResultType {
    */
   public int getGroupSort() {
     return groupSort;
+  }
+
+  /**
+   * Get the font characters that represent this result if using the genesys or starwars fonts.
+   * @return the font characters that represent this result.
+   */
+  public String getFontCharacters() {
+    return fontCharacters;
   }
 }
