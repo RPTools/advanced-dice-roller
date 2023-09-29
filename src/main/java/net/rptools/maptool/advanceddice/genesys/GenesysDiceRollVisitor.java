@@ -12,7 +12,7 @@
  * <http://www.gnu.org/licenses/> and specifically the Affero license
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
-package net.rptools.maptool.advanceddice;
+package net.rptools.maptool.advanceddice.genesys;
 
 import java.util.ArrayList;
 import java.util.function.ToIntFunction;
@@ -46,6 +46,7 @@ import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.ThreatContext;
 import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.TriumphContext;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Interval;
+import org.antlr.v4.runtime.tree.ErrorNode;
 
 /** Tree visitor for te syntax tree built by the parser. */
 public class GenesysDiceRollVisitor
@@ -134,7 +135,9 @@ public class GenesysDiceRollVisitor
   public GenesysDiceResultBuilder visitGroupedGenesysRoll(GroupedGenesysRollContext ctx) {
     var groupRes = new GenesysDiceResultBuilder();
     var res = visit(ctx.genesysRolls());
-    return groupRes.addGroup(ctx.groupName().getText().replaceAll(":$", ""), res).setRollString(getRollString(ctx));
+    return groupRes
+        .addGroup(ctx.groupName().getText().replaceAll(":$", ""), res)
+        .setRollString(getRollString(ctx));
   }
 
   @Override
@@ -295,8 +298,15 @@ public class GenesysDiceRollVisitor
     }
   }
 
+  @Override
+  public GenesysDiceResultBuilder visitErrorNode(ErrorNode node) {
+    var text = node.getText();
+    throw new IllegalArgumentException("Invalid roll: " + text); // TODO: CDW
+  }
+
   /**
    * Returns the roll string for the specified context.
+   *
    * @param ctx the context to get the roll string for.
    * @return the roll string for the specified context.
    */
@@ -305,5 +315,4 @@ public class GenesysDiceRollVisitor
     int end = ctx.stop.getStopIndex();
     return ctx.start.getInputStream().getText(new Interval(start, end));
   }
-
 }

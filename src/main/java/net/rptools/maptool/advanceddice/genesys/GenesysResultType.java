@@ -12,7 +12,7 @@
  * <http://www.gnu.org/licenses/> and specifically the Affero license
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
-package net.rptools.maptool.advanceddice;
+package net.rptools.maptool.advanceddice.genesys;
 
 /** Enumeration of the possible results of a die roll. */
 public enum GenesysResultType {
@@ -193,9 +193,11 @@ public enum GenesysResultType {
 
   /**
    * Get the font characters that represent this result if using the genesys or starwars fonts.
+   *
    * @return the font characters that represent this result.
    */
   public String getFontCharacters() {
     return fontCharacters;
   }
+
 }

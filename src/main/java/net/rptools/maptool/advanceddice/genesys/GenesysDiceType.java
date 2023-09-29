@@ -12,9 +12,10 @@
  * <http://www.gnu.org/licenses/> and specifically the Affero license
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
-package net.rptools.maptool.advanceddice;
+package net.rptools.maptool.advanceddice.genesys;
 
 import java.util.List;
+import net.rptools.maptool.advanceddice.DiceRoller;
 
 /** Enumeration of the possible dice types. */
 public enum GenesysDiceType {

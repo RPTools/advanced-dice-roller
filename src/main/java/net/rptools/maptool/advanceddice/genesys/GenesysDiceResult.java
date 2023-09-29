@@ -12,13 +12,14 @@
  * <http://www.gnu.org/licenses/> and specifically the Affero license
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
-package net.rptools.maptool.advanceddice;
+package net.rptools.maptool.advanceddice.genesys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import net.rptools.maptool.advanceddice.DiceExpressionError;
 
 /** Class the represents the result of a Genesys dice roll. */
 public class GenesysDiceResult {
@@ -57,6 +58,9 @@ public class GenesysDiceResult {
   /** The results that were rolled for each dice type. */
   private final Map<GenesysDiceType, List<GenesysResultType>> diceResults = new HashMap<>();
 
+  /** The errors that occurred during the roll. */
+  private final List<DiceExpressionError> errors = new ArrayList<>();
+
   /**
    * Constructor.
    *
@@ -65,6 +69,22 @@ public class GenesysDiceResult {
    * @param groups the capture groups and their results.
    */
   GenesysDiceResult(String rollString, List<Result> rolls, Map<String, GenesysDiceResult> groups) {
+    this(rollString, rolls, groups, List.of());
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param rollString The string representing the roll.
+   * @param rolls The rolls that occurred.
+   * @param groups the capture groups and their results.
+   * @param errors The errors that occurred.
+   */
+  GenesysDiceResult(
+      String rollString,
+      List<Result> rolls,
+      Map<String, GenesysDiceResult> groups,
+      List<DiceExpressionError> errors) {
     this.rollString = rollString;
 
     int successCount = 0;
@@ -101,16 +121,18 @@ public class GenesysDiceResult {
     for (var roll : rolls) {
       diceResults.computeIfAbsent(roll.diceType(), k -> new ArrayList<>()).add(roll.resultType());
     }
+    this.errors.addAll(errors);
   }
 
   /**
-   * Constructor.
+   * Create a result with errors.
    *
    * @param rollString The string representing the roll.
-   * @param rolls The rolls that occurred.
+   * @param errors The errors that occurred.
+   * @return the result.
    */
-  GenesysDiceResult(String rollString, List<Result> rolls) {
-    this(rollString, rolls, Map.of());
+  static GenesysDiceResult error(String rollString, List<DiceExpressionError> errors) {
+    return new GenesysDiceResult(rollString, List.of(), Map.of(), errors);
   }
 
   /**
@@ -242,5 +264,13 @@ public class GenesysDiceResult {
    */
   public long getNumberOfResult(GenesysResultType resultType) {
     return rolls.stream().filter(r -> r.resultType == resultType).count();
+  }
+
+  /**
+   * Returns if any errors occurred during the roll.
+   * @return {@code true} if any errors occurred during the roll.
+   */
+  public boolean hasErrors() {
+    return !errors.isEmpty();
   }
 }

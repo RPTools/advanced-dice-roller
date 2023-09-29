@@ -12,13 +12,13 @@
  * <http://www.gnu.org/licenses/> and specifically the Affero license
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
-package net.rptools.maptool.advanceddice;
+package net.rptools.maptool.advanceddice.genesys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import net.rptools.maptool.advanceddice.GenesysDiceResult.Result;
+import net.rptools.maptool.advanceddice.genesys.GenesysDiceResult.Result;
 
 /** Builder class for creating {@link GenesysDiceResult} objects. */
 public class GenesysDiceResultBuilder {
