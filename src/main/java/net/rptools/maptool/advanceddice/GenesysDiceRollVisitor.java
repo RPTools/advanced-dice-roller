@@ -44,6 +44,8 @@ import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.StringLiteralCo
 import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.SuccessContext;
 import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.ThreatContext;
 import net.rptools.maptool.advanceddice.parser.GenesysDiceParser.TriumphContext;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.misc.Interval;
 
 /** Tree visitor for te syntax tree built by the parser. */
 public class GenesysDiceRollVisitor
@@ -103,7 +105,8 @@ public class GenesysDiceRollVisitor
     for (var roll : ctx.genesysRoll()) {
       res.add(visit(roll));
     }
-    return new GenesysDiceResultBuilder().merge(res).setRollString(ctx.getText());
+
+    return new GenesysDiceResultBuilder().merge(res).setRollString(getRollString(ctx));
   }
 
   @Override
@@ -113,7 +116,7 @@ public class GenesysDiceRollVisitor
     for (int i = 0; i < count; i++) {
       res.add(visit(ctx.genesysDiceType()));
     }
-    return new GenesysDiceResultBuilder().merge(res).setRollString(ctx.getText());
+    return new GenesysDiceResultBuilder().merge(res).setRollString(getRollString(ctx));
   }
 
   @Override
@@ -124,14 +127,14 @@ public class GenesysDiceRollVisitor
     for (int i = 0; i < count; i++) {
       res.add(visit(ctx.genesysDiceResults()));
     }
-    return new GenesysDiceResultBuilder().merge(res).setRollString(ctx.getText());
+    return new GenesysDiceResultBuilder().merge(res).setRollString(getRollString(ctx));
   }
 
   @Override
   public GenesysDiceResultBuilder visitGroupedGenesysRoll(GroupedGenesysRollContext ctx) {
     var groupRes = new GenesysDiceResultBuilder();
     var res = visit(ctx.genesysRolls());
-    return groupRes.addGroup(ctx.groupName().getText().replaceAll(":$", ""), res).setRollString(ctx.getText());
+    return groupRes.addGroup(ctx.groupName().getText().replaceAll(":$", ""), res).setRollString(getRollString(ctx));
   }
 
   @Override
@@ -291,4 +294,16 @@ public class GenesysDiceRollVisitor
       return 1; // TODO: CDW
     }
   }
+
+  /**
+   * Returns the roll string for the specified context.
+   * @param ctx the context to get the roll string for.
+   * @return the roll string for the specified context.
+   */
+  private String getRollString(ParserRuleContext ctx) {
+    int start = ctx.start.getStartIndex();
+    int end = ctx.stop.getStopIndex();
+    return ctx.start.getInputStream().getText(new Interval(start, end));
+  }
+
 }

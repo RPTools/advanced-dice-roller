@@ -39,7 +39,6 @@ public class GenesysDiceRoller {
     var tree = parser.startGenesys();
     var visitor = new GenesysDiceRollVisitor(variableSupplier, propertySupplier, promptSupplier);
     var result = visitor.visit(tree);
-    result.setRollString(rollString);
     return result.build();
   }
 }
