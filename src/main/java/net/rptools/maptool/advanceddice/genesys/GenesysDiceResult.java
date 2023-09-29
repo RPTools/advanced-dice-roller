@@ -268,9 +268,20 @@ public class GenesysDiceResult {
 
   /**
    * Returns if any errors occurred during the roll.
+   *
    * @return {@code true} if any errors occurred during the roll.
    */
   public boolean hasErrors() {
     return !errors.isEmpty();
   }
+
+  /**
+   * Returns the errors that occurred during the roll.
+   *
+   * @return the errors that occurred during the roll.
+   */
+  public List<DiceExpressionError> getErrors() {
+    return errors;
+  }
+  ;
 }

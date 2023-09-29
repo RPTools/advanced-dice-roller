@@ -199,5 +199,4 @@ public enum GenesysResultType {
   public String getFontCharacters() {
     return fontCharacters;
   }
-
 }

@@ -20,8 +20,10 @@ import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 
+/** Error listener for dice expressions. */
 public class DiceErrorListener extends BaseErrorListener {
 
+  /** The errors that occurred. */
   private final List<DiceExpressionError> errors = new ArrayList<>();
 
   @Override
@@ -35,6 +37,11 @@ public class DiceErrorListener extends BaseErrorListener {
     errors.add(new DiceExpressionError(line, charPositionInLine, msg));
   }
 
+  /**
+   * Returns the errors that occurred.
+   *
+   * @return the errors that occurred.
+   */
   public List<DiceExpressionError> getErrors() {
     return errors;
   }

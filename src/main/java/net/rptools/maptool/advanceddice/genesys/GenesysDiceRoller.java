@@ -38,11 +38,13 @@ public class GenesysDiceRoller {
       ToIntFunction<String> variableSupplier,
       ToIntFunction<String> propertySupplier,
       ToIntFunction<String> promptSupplier) {
+    var errorListener = new DiceErrorListener();
     var lexer = new GenesysDiceLexer(CharStreams.fromString(rollString));
+    lexer.removeErrorListeners();
+    lexer.addErrorListener(errorListener);
     var tokens = new CommonTokenStream(lexer);
     var parser = new GenesysDiceParser(tokens);
     parser.removeErrorListeners();
-    var errorListener = new DiceErrorListener();
     parser.addErrorListener(errorListener);
     var tree = parser.startGenesys();
     if (!errorListener.getErrors().isEmpty()) {

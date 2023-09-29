@@ -14,4 +14,11 @@
  */
 package net.rptools.maptool.advanceddice;
 
+/**
+ * Class to hold an error that occurred during dice expression parsing.
+ *
+ * @param line the line the error occurred on.
+ * @param charPositionInLine the character position in the line the error occurred on.
+ * @param msg the error message.
+ */
 public record DiceExpressionError(int line, int charPositionInLine, String msg) {}
